@@ -92,3 +92,13 @@ const storage = multer.diskStorage({
 
 // This creates a multer instance with the storage engine
 const upload = multer({storage});
+
+
+/*---configuring mongoose---*/
+const PORT = process.env.PORT || 5001; //getting the port from the .env file or using port 5000
+
+//useNewUrlParser is used to parse the url string properly and useUnifiedTopology is used to use the new server discovery and monitoring engine
+mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+    app.listen(PORT, () => console.log(`⚡ Server running on port: ${PORT} ⚡ `));
+}) //connecting to the database
+.catch((error) => console.log(`${error} did not connect`)); //catching any errors that occur while connecting to the database
