@@ -7,7 +7,12 @@ import multer from "multer"; // It's a node.js middleware for handling multipart
 import helmet from "helmet"; // add security-related HTTP headers to the responses, making the Express app more secure.
 import morgan from "morgan";// used for logging HTTP requests and responses, making it easier to debug and analyze the application.
 import path from "path"; // for working with file and directory paths
-import {fileURLToPath} from "url";// allow us to properly resolve the path to the current file, regardless of where it is run.
+import {fileURLToPath} from "url";
+import {register} from "./controllers/auth.js";
+import User from "./models/User.js";
+
+
+// allow us to properly resolve the path to the current file, regardless of where it is run.
 
 
 //---This is used when you only use type: module in your package.json---//
@@ -94,7 +99,6 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 
-
 //---configuring routes---//
 //**-Routes for files-**//
 //when someone hits the /upload endpoint, we will run the register function which will register the user after checking if the user already exists
@@ -109,4 +113,4 @@ const PORT = process.env.PORT || 5001; //getting the port from the .env file or 
 mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
     app.listen(PORT, () => console.log(`⚡ Server running on port: ${PORT} ⚡ `));
 }) //connecting to the database
-.catch((error) => console.log(`${error} did not connect`)); //catching any errors that occur while connecting to the database
+    .catch((error) => console.log(`${error} did not connect`)); //catching any errors that occur while connecting to the database
