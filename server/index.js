@@ -94,6 +94,14 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 
+
+//---configuring routes---//
+//**-Routes for files-**//
+//when someone hits the /upload endpoint, we will run the register function which will register the user after checking if the user already exists
+//we are using the upload.single middleware to upload a single file
+app.post("/upload", upload.single("file"), register);
+
+
 /*---configuring mongoose---*/
 const PORT = process.env.PORT || 5001; //getting the port from the .env file or using port 5000
 

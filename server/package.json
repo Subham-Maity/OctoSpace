@@ -1,10 +1,10 @@
 {
   "name": "octospace",
   "version": "1.0.0",
-  "description": "Subset of Octomeet",
-  "main": "index.js",
+  "description": "Subset of OctoMeet",
   "type": "module",
   "devDependencies": {},
+  "main": "/server/index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon --config nodemon.json src/app.ts"
