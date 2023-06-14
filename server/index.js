@@ -103,7 +103,7 @@ const upload = multer({storage});
 //**-Upload Routes-**//
 //when someone hits the /upload endpoint, we will run the register function which will register the user after checking if the user already exists
 //we are using the upload.single middleware to upload a single file
-app.post("/upload", upload.single("file"), register);
+app.post("/auth/register", upload.single("picture"), register);
 
 //**-Auth Routes-**//
 app.use("/auth",authRoute);
