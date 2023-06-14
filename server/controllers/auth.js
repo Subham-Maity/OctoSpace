@@ -40,13 +40,13 @@ export const register = async (req, res) => {
 }
 
 // Logging in (routes\auth.js)
-export const login = async (req, res)=>{
-    try{
+export const login = async (req, res) => {
+    try {
         // Get the email and password from the request body means from the client side we grab the email and password when user login
-        const { email, password } = req.body;
+        const {email, password} = req.body;
 
         // Find the user with the same email in the database using the User model using mongoose
-        const user = await User.findOne({ email: email });
+        const user = await User.findOne({email: email});
 
         // If no user is found, send back a 400 status code and a message means if user is not registered then send error
         if (!user) return res.status(400).json({msg: "User does not exist"});
@@ -58,7 +58,7 @@ export const login = async (req, res)=>{
         if (!isMatch) return res.status(400).json({msg: "Invalid credentials"});
 
         // Generate a token using jwt, using the user ID and the secret key from the environment variables as arguments
-        const token = jwt.sign({ id: user._id}, process.env.JWT_SECRET) // user._id means user id that is saved in the database
+        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET) // user._id means user id that is saved in the database
 
         // Delete the password from the user object to avoid sending it back to the client
         delete user.password; // delete password from the user object
@@ -66,9 +66,9 @@ export const login = async (req, res)=>{
         // Send back a 200 status code and the token and the user data as JSON
         res.status(200).json({token, user}); // send token and user data to the client
 
-    }catch(err){
+    } catch (err) {
         // Handle any errors and send back a 500 status code and the error message as JSON
-        res.status(500).json({ error: err.message });
+        res.status(500).json({error: err.message});
     }
 }
 
