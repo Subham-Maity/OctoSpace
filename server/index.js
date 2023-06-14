@@ -106,7 +106,7 @@ const upload = multer({storage});
 app.post("/upload", upload.single("file"), register);
 
 //**-Auth Routes-**//
-app.use("/auth",authRoutes);
+app.use("/auth",authRoute);
 
 
 
