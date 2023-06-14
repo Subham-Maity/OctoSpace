@@ -10,7 +10,7 @@ import path from "path"; // for working with file and directory paths
 import {fileURLToPath} from "url";
 import {register} from "./controllers/auth.js";
 import User from "./models/User.js";
-
+import authRoute from "./routes/auth.js";
 
 // allow us to properly resolve the path to the current file, regardless of where it is run.
 
@@ -100,10 +100,16 @@ const upload = multer({storage});
 
 
 //---configuring routes---//
-//**-Routes for files-**//
+//**-Upload Routes-**//
 //when someone hits the /upload endpoint, we will run the register function which will register the user after checking if the user already exists
 //we are using the upload.single middleware to upload a single file
 app.post("/upload", upload.single("file"), register);
+
+//**-Auth Routes-**//
+app.use("/auth",authRoutes);
+
+
+
 
 
 /*---configuring mongoose---*/
