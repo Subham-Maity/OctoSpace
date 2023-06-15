@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Subset of OctoMeet",
   "type": "module",
-  "devDependencies": {},
   "main": "/server/index.js",
   "scripts": {
     "start": "node index.js",
@@ -28,7 +27,7 @@
     "gridfs-stream": "^1.1.1",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.2.4",
+    "mongoose": "^7.3.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
     "multer-gridfs-storage": "^5.0.2"
