@@ -8,11 +8,12 @@ import helmet from "helmet"; // add security-related HTTP headers to the respons
 import morgan from "morgan";// used for logging HTTP requests and responses, making it easier to debug and analyze the application.
 import path from "path"; // for working with file and directory paths
 import {fileURLToPath} from "url";
-import {register} from "./controllers/auth.js";
-import User from "./models/User.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
-
+import postRoutes from "./routes/posts.js";
+import {register} from "./controllers/auth.js";
+import {createPost} from "./controllers/posts.js";
+import { verifyToken } from "./middleware/auth.js";
 // allow us to properly resolve the path to the current file, regardless of where it is run.
 
 
@@ -106,11 +107,15 @@ const upload = multer({storage});
 //we are using the upload.single middleware to upload a single file
 app.post("/auth/register", upload.single("picture"), register);
 
+//Allow to upload pictures
+app.post("/posts", verifyToken, upload.single("picture"), createPost);
+
 //**-Auth Routes-**//
 app.use("/auth", authRoutes);
 //**-User Routes-**//
 app.use("/users",userRoutes);
-
+//**-Post Routes-**//
+app.use("/posts", postRoutes);
 
 
 
