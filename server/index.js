@@ -7,14 +7,20 @@ import multer from "multer"; // It's a node.js middleware for handling multipart
 import helmet from "helmet"; // add security-related HTTP headers to the responses, making the Express app more secure.
 import morgan from "morgan";// used for logging HTTP requests and responses, making it easier to debug and analyze the application.
 import path from "path"; // for working with file and directory paths
-import {fileURLToPath} from "url";
+import {fileURLToPath} from "url";// allow us to properly resolve the path to the current file, regardless of where it is run.
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
 import {register} from "./controllers/auth.js";
 import {createPost} from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
-// allow us to properly resolve the path to the current file, regardless of where it is run.
+// Import the connectDB function as a default import
+import connectDB from './config/mongodb.js';
+
+//Test
+import User from "./models/User.js";
+import Post from "./models/Post.js";
+import { users, posts } from "./TestData/index.js";
 
 
 //---This is used when you only use type: module in your package.json---//
@@ -117,13 +123,16 @@ app.use("/users",userRoutes);
 //**-Post Routes-**//
 app.use("/posts", postRoutes);
 
-
-
 /*---configuring mongoose---*/
 const PORT = process.env.PORT || 5001; //getting the port from the .env file or using port 5000
 
-//useNewUrlParser is used to parse the url string properly and useUnifiedTopology is used to use the new server discovery and monitoring engine
-mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
-    app.listen(PORT, () => console.log(`⚡ Server running on port: ${PORT} ⚡ `));
-}) //connecting to the database
-    .catch((error) => console.log(`${error} did not connect`)); //catching any errors that occur while connecting to the database
+//calling the connectDB function
+connectDB();
+
+//starting the server
+app.listen(PORT, () => console.log(`✅→⫸ Server running on port: ${PORT} ⚡ `));
+
+// User.insertMany(users);
+// Post.insertMany(posts);
+
+
