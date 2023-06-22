@@ -1,7 +1,13 @@
-import Image from 'next/image'
+import Navbar from "@/app/scenes/navbar";
+import HomePage from "@/app/scenes/homePage";
+import ProfilePage from "@/app/scenes/profilePage";
 
 export default function Home() {
-  return (
-    <div>OctoSpace</div>
-  )
+    return (
+        <div>
+            <Navbar/>
+            <HomePage/>
+            <ProfilePage/>
+        </div>
+    )
 }

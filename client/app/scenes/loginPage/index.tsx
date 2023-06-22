@@ -1,5 +1,7 @@
-export const loginPage = () => {
+const loginPage = () => {
     return (
         <></>
     );
 };
+
+export default loginPage;

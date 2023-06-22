@@ -1,5 +1,7 @@
-export const widgets = () => {
+const widgets = () => {
     return (
         <></>
     );
 };
+
+export default widgets;

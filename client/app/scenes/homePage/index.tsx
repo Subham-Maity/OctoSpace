@@ -1,6 +1,8 @@
-export const homePage =
+const homePage =
 () => {
     return (
         <></>
     );
 };
+
+export default homePage;
